@@ -1,0 +1,21 @@
+web:
+  build: .
+  ports:
+    - "8000:80"
+  links:
+    - db
+  volumes:
+    - ./:/var/www/html/
+
+db:
+  image: "mysql:5.7"
+  restart: always
+  volumes:
+    - ./_mysql:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_USER: admin
+    MYSQL_PASSWORD: test
+    MYSQL_DATABASE: database
+  ports:
+    - "3306:3306"
